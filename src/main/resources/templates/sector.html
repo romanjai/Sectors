@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/layout_deafult}">
+<head>
+  <title th:text="${dto.sector.id} ? 'Edit Sector' : 'Add Sector'"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+  <div th:replace="fragment/header"></div>
+
+  <div layout:fragment="content" class="container">
+    <div class="py-5 text-center">
+      <h2 th:text="${dto.sector.id} ? 'Please enter your name and pick the Sectors you are currently involved in.' : 'Please enter your name and pick the Sectors you are currently involved in.'"></h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 order-md-1">
+        <form action="#" th:action="@{/save}" th:object="${dto}" method="post" class="needs-validation" novalidate>
+          <input type="hidden" th:field="*{borrower.id}" />
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="First" value="" th:field="*{borrower.name}">
+              <div class="text text-danger" th:if="${#fields.hasErrors('borrower.name')}" th:errors="*{borrower.name}"></div>
+            </div>
+          </div>
+          <div class="mb-1">
+            <label for="sectorinfo">Sectorinfo</label>
+            <select th:field="*{borrower.sectorinfo}" class="custom-select d-block w-100" id="sectorinfo">
+              <option value="">Choose...</option>
+              <option th:each="sectorinfo : ${sectorinfos}" th:value="${sectorinfo.code}" th:text="${sectorinfo.name}"></option>
+            </select>
+            <div class="text text-danger" th:if="${#fields.hasErrors('borrower.sectorinfo')}" th:errors="*{borrower.sectorinfo}"></div>
+          </div>
+          <div class="mb-2">
+            <td>
+              <input required type="checkbox"  th:field="*{borrower.terms}" value="true" /> Agree to terms
+              <div class="text text-danger" th:if="${#fields.hasErrors('borrower.terms')}" th:errors="*{borrower.terms}"></div>
+            </td>
+          </div>
+          <hr class="mb-3">
+          <div class="row">
+            <input type="hidden" th:field="*{sector.id}" />
+            <input type="hidden" th:field="*{sector.borrower}" />
+
+          </div>
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit" th:text="${dto.sector.id} ? 'Save' : 'Create'"></button>
+        </form>
+      </div>
+    </div><!-- closing div class="row" -->
+  </div><!-- closing div class="container" -->
+  <div th:replace="fragment/footer"></div>
+</body>
+</html>

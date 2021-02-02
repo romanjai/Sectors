@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/layout_default}" >
+<head>
+  <title>Error Page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+  <div th:replace="fragment/header"></div>
+
+  <div layout:fragment="content" class="container">
+    <div class="py-5 text-center">
+
+      There was an error  |<span th:text="${message}"></span>| <span th:text="${status}" class="text text-danger"></span>
+
+    </div>
+  </div><!-- closing div layout:fragment="content" class="container" -->
+  <div th:replace="fragment/footer"></div>
+</body>
+</html>

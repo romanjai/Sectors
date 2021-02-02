@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/layout_deafult}">
+<head>
+  <title>loan list</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+  <div th:replace="fragment/header"></div>
+  <div layout:fragment="content" class="container">
+    <div class="py-5 text-center">
+      <h2>List</h2>
+    </div>
+    <div class="row">
+      <a href="sector" class="btn btn-primary">Create List</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">List with sectors</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${sectors.empty}">
+            <td colspan="5"> No data available </td>
+          </tr>
+          <tr th:each="sector, stat: ${sectors}">
+            <th scope="row"><span th:text="${stat.index+1}"></span></th>
+            <td>
+              <a th:href="@{sector(id=${sector.id})}" class="btn btn-primary">Edit list</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- closing div class="row" -->
+
+  </div><!-- closing div class="container"-->
+
+  <div th:replace="fragment/footer"></div>
+</body>
+</html>

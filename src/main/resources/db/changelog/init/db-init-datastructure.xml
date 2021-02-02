@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="roman" id="init_strucure">
+        <preConditions onFail="HALT">
+            <sqlCheck expectedResult="1">
+                PRAGMA foreign_keys;
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE TABLE IF NOT EXISTS SECTORINFO(
+            CODE INTEGER NOT NULL PRIMARY KEY,
+            NAME VARCHAR(255) NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS USER(
+            LOGIN VARCHAR(255) NOT NULL PRIMARY KEY,
+            PASSWORD VARCHAR(255) NOT NULL,
+            ROLE VARCHAR(64) NOT NULL,
+            ENABLED TINYINT NOT NULL,
+            FIRST_NAME VARCHAR(255) NOT NULL,
+            LAST_NAME VARCHAR(255) NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS BORROWER(
+            ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            NAME VARCHAR(255) NOT NULL,
+            FK_SECTORINFO  INTEGER NOT NULL,
+            TERMS BOOLEAN
+            );
+
+            CREATE TABLE IF NOT EXISTS SECTOR(
+            ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            FK_OWNER VARCHAR(255) NOT NULL,
+            FK_BORROWER_ID INTEGER NOT NULL,
+            FOREIGN KEY(FK_OWNER) REFERENCES USER(LOGIN),
+            FOREIGN KEY(FK_BORROWER_ID) REFERENCES BORROWER(ID)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE IF EXISTS USER;
+            DROP TABLE IF EXISTS SECTOR;
+            DROP TABLE IF EXISTS BORROWER;
+            DROP TABLE IF EXISTS SECTORINFO;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

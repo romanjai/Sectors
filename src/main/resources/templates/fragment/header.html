@@ -1,0 +1,5 @@
+<div th:fragment="header">
+  <div style="display: flex; justify-content: flex-end" sec:authorize="isAuthenticated()">
+    <a href="/logout" class="btn btn-primary">LOGOUT</a>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+ 
+<!-- use sector info-->
+  <changeSet author="roman" id="sectorinfo">
+      <preConditions onFail="HALT">
+        <sqlCheck expectedResult="1">
+          PRAGMA foreign_keys;
+        </sqlCheck>
+      </preConditions>
+      <sql>
+        INSERT INTO SECTORINFO(CODE, NAME)
+        VALUES
+        (1, "Manufaturing"),
+        (19, "Construction materials"),
+        (18, "Electronics and Optics"),
+        (6,"Food and Beverage"),
+        (342,"Bakery &amp; confectionery products"),
+        (43, "Beverages"),
+        (42,"Fish &amp; fish products"),
+        (40," Meat &amp; meat products"),
+        (39,"Milk &amp; dairy products"),
+        (437,"Other"),
+        (378,"Sweets &amp; snack food"),
+        (13,"Furniture"),
+        (389,"Bathroom/sauna"),
+        (385,"Bedroom"),
+        (390,"Childrenâ€™s room"),
+        (98,"Kitchen"),
+        (101,"Living room"),
+        (392,"Office"),
+        (394,"Other (Furniture)"),
+        (341,"Outdoor"),
+        (99,"Project furniture"),
+        (12,"Machinery"),
+        (94,"Machinery components"),
+        (91,"Machinery equipment/tool"),
+        (224,"Manufacture of machinery"),
+        (97,"Maritime"),
+        (271,"Aluminium and steel workboats"),
+        (269,"Boat/Yacht building"),
+        (230,"Ship repair and conversion"),
+        (93,"Metal structures"),
+        (508,"Other"),
+        (227,"Repair and maintenance service"),
+        (11,"Metalworking"),
+        (67,"Construction of metal structures"),
+        (263,"Houses and "),
+        (267,"Metal products"),
+        (542,"Metal works"),
+        (75,"CNC-machining"),
+        (62,"Forgings, Fasteners"),
+        (69,"Gas, Plasma, Laser cutting"),
+        (66,"MIG, TIG, Aluminum welding"),
+        (9,"Plastic and Rubber"),
+        (54,"Packaging"),
+        (556,"Plastic goods"),
+        (559,"Plastic processing technology"),
+        (55,"Blowing"),
+        (57,"Moulding"),
+        (53,"Plastics welding and processing"),
+        (560,"Plastic profiles"),
+        (5,"Printing"),
+        (148,"Advertising"),
+        (150,"Book/Periodicals printing"),
+        (145,"Labelling and packaging printing"),
+        (7,"Textile and Clothing"),
+        (44,"Clothing"),
+        (45,"Textile"),
+        (8,"Wood"),
+        (337,"Other (Wood)"),
+        (51,"Wooden building materials"),
+        (47,"Wooden houses"),
+        (3,"Other"),
+        (37,"Creative industries"),
+        (29,"Energy technology"),
+        (33,"Environment"),
+        (2,"Service"),
+        (25,"Business services"),
+        (35,"Engineering"),
+        (28,"Information Technology and Telecommunications"),
+        (581,"Data processing, Web portals, E-marketing"),
+        (576,"Programming, Consultancy"),
+        (121,"Software, Hardware"),
+        (122,"Telecommunications"),
+        (22,"Tourism"),
+        (141,"Translation services"),
+        (21,"Transport and Logistics"),
+        (111,"Air"),
+        (114,"Rail"),
+        (112,"Road");
+      </sql>
+      <rollback>
+        DELETE FROM SECTORINFO;
+      </rollback>
+    </changeSet>
+
+  <!-- all passwords are 123 -->
+  <changeSet author="roman" id="sectorinfo_init_data_users">
+    <sql>
+      INSERT INTO USER(LOGIN, PASSWORD, ROLE, ENABLED, FIRST_NAME, LAST_NAME)
+      VALUES
+        ("test", "$2a$04$67h/CpzxiEBCRGwKofJ3LOJB9vg0yJtu1HmNmm8juh7CYPPNdZBK6", "USER", 1, "Roman1", "Test1"),
+        ("test1", "$2a$04$67h/CpzxiEBCRGwKofJ3LOJB9vg0yJtu1HmNmm8juh7CYPPNdZBK6", "USER", 1, "Roman2", "Test2");
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>
